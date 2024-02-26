@@ -1,0 +1,67 @@
+{% load static %}
+{% load level_design %}
+
+<!-- USER AVATAR -->
+<!--  add 'online' class below if user online  -->
+<div class="user-avatar small no-outline">
+    <!-- USER AVATAR CONTENT -->
+    <div class="user-avatar-content">
+        <!-- HEXAGON -->
+        <div class="hexagon-image-30-32"
+             {% if account == user.account %}
+             data-src="{% static 'img/badge/gold-b.png' %}"
+             {% else %}
+             data-src="{% static 'img/badge/silver-b.png' %}"
+             {% endif %}
+        >
+        </div>
+        <!-- /HEXAGON -->
+    </div>
+    <!-- /USER AVATAR CONTENT -->
+
+    <!-- USER AVATAR PROGRESS -->
+    <div class="user-avatar-progress">
+        <!-- HEXAGON -->
+        <div class="hexagon-progress-40-44
+        {% if account == user.account %}
+        logged-account-hexagon-progress-40-44
+        {% else %}
+        account-color-index-{{account.level|get_color_index_by_level}}-hexagon-progress-40-44
+        {% endif %}"></div>
+        <!-- /HEXAGON -->
+    </div>
+    <!-- /USER AVATAR PROGRESS -->
+
+    <!-- USER AVATAR PROGRESS BORDER -->
+    <div class="user-avatar-progress-border">
+        <!-- HEXAGON -->
+        <div class="hexagon-border-40-44"></div>
+        <!-- /HEXAGON -->
+    </div>
+    <!-- /USER AVATAR PROGRESS BORDER -->
+
+    <!-- USER AVATAR BADGE -->
+    <div class="user-avatar-badge">
+        <!-- USER AVATAR BADGE BORDER -->
+        <div class="user-avatar-badge-border">
+            <!-- HEXAGON -->
+            <div class="hexagon-22-24"></div>
+            <!-- /HEXAGON -->
+        </div>
+        <!-- /USER AVATAR BADGE BORDER -->
+
+        <!-- USER AVATAR BADGE CONTENT -->
+        <div class="user-avatar-badge-content">
+            <!-- HEXAGON -->
+            <div class="hexagon-dark-16-18"></div>
+            <!-- /HEXAGON -->
+        </div>
+        <!-- /USER AVATAR BADGE CONTENT -->
+
+        <!-- USER AVATAR BADGE TEXT -->
+        <p class="user-avatar-badge-text">{{ account.level }}</p>
+        <!-- /USER AVATAR BADGE TEXT -->
+    </div>
+    <!-- /USER AVATAR BADGE -->
+</div>
+<!-- /USER AVATAR -->

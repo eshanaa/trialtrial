@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+{% load level_design %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- my styles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- bootstrap 4.3.1 -->
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
+    <!-- styles -->
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}">
+    <!-- simplebar styles -->
+    <link rel="stylesheet" href="{% static 'css/vendor/simplebar.css' %}">
+    <!-- tiny-slider styles -->
+    <link rel="stylesheet" href="{% static 'css/vendor/tiny-slider.css' %}">
+    <!-- styles -->
+    <link rel="stylesheet" href="{% static 'css/my.main.css' %}">
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <title>RP2 | Overview</title>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+{% include "partials/page-loader.html" %}
+<!-- /PAGE LOADER -->
+
+<!-- NAVIGATION WIDGET -->
+{% include "partials/shrunk-left-sidebar.html" %}
+<!-- /NAVIGATION WIDGET -->
+
+<!-- NAVIGATION WIDGET -->
+{% include "partials/expanded-left-sidebar.html" %}
+<!-- /NAVIGATION WIDGET -->
+
+<!-- NAVIGATION WIDGET -->
+{% include "partials/mobile-left-sidebar.html" %}
+<!-- /NAVIGATION WIDGET -->
+
+<!-- CHAT WIDGET -->
+{% include "partials/right-sidebar.html" %}
+<!-- /CHAT WIDGET -->
+
+<!-- CHAT WIDGET -->
+{% include "partials/right-chat-widget-message.html" %}
+<!-- /CHAT WIDGET -->
+
+<!-- HEADER -->
+{% include "partials/header.html" %}
+<!-- /HEADER -->
+
+<!-- CONTENT GRID -->
+{% block content %}
+{% endblock content %}
+<!-- /CONTENT GRID -->
+</div>
+
+<!-- my scripts -->
+<script src="{% static 'js/my.main.js' %}"></script>
+<!-- app -->
+<script src="{% static 'js/utils/app.js' %}"></script>
+<!-- page loader -->
+<script src="{% static 'js/utils/page-loader.js' %}"></script>
+<!-- simplebar -->
+<script src="{% static 'js/vendor/simplebar.min.js' %}"></script>
+<!-- liquidify -->
+<script src="{% static 'js/utils/liquidify.js' %}"></script>
+<!-- XM_Plugins -->
+<script src="{% static 'js/vendor/xm_plugins.min.js' %}"></script>
+<!-- tiny-slider -->
+<script src="{% static 'js/vendor/tiny-slider.min.js' %}"></script>
+<!-- chartJS -->
+<script src="{% static 'js/vendor/Chart.bundle.min.js' %}"></script>
+<!-- global.hexagons -->
+<script src="{% static 'js/global/global.hexagons.js' %}"></script>
+<!-- global.tooltips -->
+<script src="{% static 'js/global/global.tooltips.js' %}"></script>
+<!-- global.charts -->
+<script src="{% static 'js/global/global.charts.js' %}"></script>
+<!-- header -->
+<script src="{% static 'js/header/header.js' %}"></script>
+<!-- sidebar -->
+<script src="{% static 'js/sidebar/sidebar.js' %}"></script>
+<!-- content -->
+<script src="{% static 'js/content/content.js' %}"></script>
+<!-- form.utils -->
+<script src="{% static 'js/form/form.utils.js' %}"></script>
+<!-- SVG icons -->
+<script src="{% static 'js/utils/svg-loader.js' %}"></script>
+
+<!-- onMounted Lifecycle Hook -->
+<script>
+window.onload = function () {
+    {% block onMounted %}
+    {% endblock onMounted %}
+    showLoggedAccountXPProgressBarForNextLevel();
+    showLoggedAccountXPHexagonProgressInAvatarBorder();
+
+    setTimeout(function(){
+        const el = document.querySelector(".confetti-container");
+        el.remove();
+    }, 5000);
+}
+
+function showLoggedAccountXPProgressBarForNextLevel() {
+    app.plugins.createProgressBar({
+        container: '#logged-user-level',
+        height: 4,
+        gradient: {
+            colors: [
+                "{{ user.account.level|get_level_color_by_level:0 }}",
+                "{{ user.account.level|get_level_color_by_level:1 }}"
+            ]
+        },
+        scale: {
+            start: 0,
+            end: {{ user.account.get_required_xp_for_next_level }},
+            stop: {{ user.account.xp }}
+        },
+        linkText: true,
+        linkUnits: 'xp',
+        invertedProgress: true,
+        animateOnScroll: true
+    });
+}
+
+function showLoggedAccountXPHexagonProgressInAvatarBorder() {
+    app.plugins.createHexagon({
+        container: '.logged-account-hexagon-progress-40-44',
+        width: 40,
+        height: 44,
+        lineWidth: 3,
+        roundedCorners: true,
+        roundedCornerRadius: 1,
+        gradient: {
+            colors: [
+                "{{ user.account.level|get_level_color_by_level:1 }}",
+                "{{ user.account.level|get_level_color_by_level:0 }}"
+            ]
+        },
+        scale: {
+            start: 0,
+            end: {{ user.account.get_required_xp_for_next_level }},
+            stop: {{ user.account.xp }}
+        },
+    });
+
+    app.plugins.createHexagon({
+        container: '.logged-account-hexagon-progress-100-110',
+        width: 100,
+        height: 110,
+        lineWidth: 6,
+        roundedCorners: true,
+        gradient: {
+            colors: [
+                "{{ user.account.level|get_level_color_by_level:1 }}",
+                "{{ user.account.level|get_level_color_by_level:0 }}"
+            ]
+        },
+        scale: {
+            start: 0,
+            end: {{ user.account.get_required_xp_for_next_level }},
+            stop: {{ user.account.xp }}
+        }
+    });
+}
+
+{% for color_index in 10|range_list %}
+app.plugins.createHexagon({
+    container: `.account-color-index-{{ color_index }}-hexagon-progress-40-44`,
+    width: 40,
+    height: 44,
+    lineWidth: 3,
+    roundedCorners: true,
+    roundedCornerRadius: 1,
+    gradient: {
+        colors: [
+            "{{ color_index|get_level_color_by_color_index:1 }}",
+            "{{ color_index|get_level_color_by_color_index:0 }}"
+        ]
+    },
+    scale: {
+        start: 0,
+        end: 1,
+        stop: 1
+    }
+});
+{% endfor %}
+</script>
+
+</body>
+</html>

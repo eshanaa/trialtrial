@@ -1,0 +1,174 @@
+{% load static %}
+
+<nav id="navigation-widget" class="navigation-widget navigation-widget-desktop sidebar left hidden" data-simplebar>
+    <!-- NAVIGATION WIDGET COVER -->
+    <figure class="navigation-widget-cover liquid">
+        <img src="{% static 'img/cover/01.jpg' %}" alt="cover-01">
+    </figure>
+    <!-- /NAVIGATION WIDGET COVER -->
+
+    <!-- USER SHORT DESCRIPTION -->
+    <div class="user-short-description">
+        <!-- USER SHORT DESCRIPTION AVATAR -->
+        <a class="user-short-description-avatar user-avatar medium" href="#">
+            <!-- USER AVATAR BORDER -->
+            <div class="user-avatar-border">
+                <!-- HEXAGON -->
+                <div class="hexagon-120-132"></div>
+                <!-- /HEXAGON -->
+            </div>
+            <!-- /USER AVATAR BORDER -->
+
+            <!-- USER AVATAR CONTENT -->
+            <div class="user-avatar-content">
+                <!-- HEXAGON -->
+                <div class="hexagon-image-82-90" data-src="{% static 'img/badge/gold-b.png' %}"></div>
+                <!-- /HEXAGON -->
+            </div>
+            <!-- /USER AVATAR CONTENT -->
+
+            <!-- USER AVATAR PROGRESS -->
+            <div class="user-avatar-progress">
+              <!-- HEXAGON -->
+              <div class="hexagon-progress-100-110 logged-account-hexagon-progress-100-110"></div>
+              <!-- /HEXAGON -->
+            </div>
+            <!-- /USER AVATAR PROGRESS -->
+
+            <!-- USER AVATAR PROGRESS BORDER -->
+            <div class="user-avatar-progress-border">
+                <!-- HEXAGON -->
+                <div class="hexagon-border-100-110"></div>
+                <!-- /HEXAGON -->
+            </div>
+            <!-- /USER AVATAR PROGRESS BORDER -->
+
+            <!-- USER AVATAR BADGE -->
+            <div class="user-avatar-badge">
+                <!-- USER AVATAR BADGE BORDER -->
+                <div class="user-avatar-badge-border">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-32-36"></div>
+                    <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR BADGE BORDER -->
+
+                <!-- USER AVATAR BADGE CONTENT -->
+                <div class="user-avatar-badge-content">
+                    <!-- HEXAGON -->
+                    <div class="hexagon-dark-26-28"></div>
+                    <!-- /HEXAGON -->
+                </div>
+                <!-- /USER AVATAR BADGE CONTENT -->
+
+                <!-- USER AVATAR BADGE TEXT -->
+                <p class="user-avatar-badge-text">{{ user.account.level }}</p>
+                <!-- /USER AVATAR BADGE TEXT -->
+            </div>
+            <!-- /USER AVATAR BADGE -->
+        </a>
+        <!-- /USER SHORT DESCRIPTION AVATAR -->
+
+        <!-- USER SHORT DESCRIPTION TITLE -->
+        <p class="user-short-description-title"><a href="#">{{ user.first_name }} {{ user.last_name }}</a></p>
+        <!-- /USER SHORT DESCRIPTION TITLE -->
+
+        <!-- USER SHORT DESCRIPTION TEXT -->
+        <p class="user-short-description-text">
+            <a href="#">
+                {% if user.account.clan %}
+                    {{ user.account.clan }}
+                {% else %}
+                    No Clan
+                {% endif %}
+            </a>
+        </p>
+        <!-- /USER SHORT DESCRIPTION TEXT -->
+    </div>
+    <!-- /USER SHORT DESCRIPTION -->
+
+    <!-- BADGE LIST --><!-- /BADGE LIST -->
+
+    <!-- USER STATS --><!-- /USER STATS -->
+
+    <!-- MENU -->
+    <ul class="menu">
+
+        <!-- MENU ITEM -->
+        <li class="menu-item {% if request.resolver_match.url_name == 'overview' %} active {% endif %}">
+            <!-- MENU ITEM LINK -->
+            <a class="menu-item-link" href="{% url 'clans:overview' %}">
+                <!-- MENU ITEM LINK ICON -->
+                <svg class="menu-item-link-icon icon-newsfeed">
+                    <use xlink:href="#svg-overview"></use>
+                </svg>
+                <!-- /MENU ITEM LINK ICON -->
+                Overview
+            </a>
+            <!-- /MENU ITEM LINK -->
+        </li>
+        <!-- /MENU ITEM -->
+
+        <!-- MENU ITEM -->
+        <li class="menu-item {% if request.resolver_match.url_name == 'newsfeed_view' %} active {% endif %}">
+            <!-- MENU ITEM LINK -->
+            <a class="menu-item-link" href="{% url 'diaries:newsfeed_view' %}">
+                <!-- MENU ITEM LINK ICON -->
+                <svg class="menu-item-link-icon icon-newsfeed">
+                    <use xlink:href="#svg-group"></use>
+                </svg>
+                <!-- /MENU ITEM LINK ICON -->
+                Newsfeed
+            </a>
+            <!-- /MENU ITEM LINK -->
+        </li>
+        <!-- /MENU ITEM -->
+
+        <!-- MENU ITEM -->
+        <li class="menu-item {% if request.resolver_match.url_name == 'diaries_view' %} active {% endif %}">
+            <!-- MENU ITEM LINK -->
+            <a class="menu-item-link" href="{% url 'diaries:diaries_view' %}">
+                <!-- MENU ITEM LINK ICON -->
+                <svg class="menu-item-link-icon icon-newsfeed">
+                    <use xlink:href="#svg-events"></use>
+                </svg>
+                <!-- /MENU ITEM LINK ICON -->
+                My Diaries
+            </a>
+            <!-- /MENU ITEM LINK -->
+        </li>
+        <!-- /MENU ITEM -->
+
+<!--        &lt;!&ndash; MENU ITEM &ndash;&gt;-->
+<!--        <li class="menu-item">-->
+<!--            &lt;!&ndash; MENU ITEM LINK &ndash;&gt;-->
+<!--            <a class="menu-item-link" href="{% url 'issues:issues_view' %}">-->
+<!--                &lt;!&ndash; MENU ITEM LINK ICON &ndash;&gt;-->
+<!--                <svg class="menu-item-link-icon icon-newsfeed">-->
+<!--                    <use xlink:href="#svg-overview"></use>-->
+<!--                </svg>-->
+<!--                &lt;!&ndash; /MENU ITEM LINK ICON &ndash;&gt;-->
+<!--                Issues-->
+<!--            </a>-->
+<!--            &lt;!&ndash; /MENU ITEM LINK &ndash;&gt;-->
+<!--        </li>-->
+<!--        &lt;!&ndash; /MENU ITEM &ndash;&gt;-->
+
+        <!-- MENU ITEM -->
+        <li class="menu-item">
+            <!-- MENU ITEM LINK -->
+            <a class="menu-item-link" href="{% url 'authentication:signout' %}">
+                <!-- MENU ITEM LINK ICON -->
+                <svg class="menu-item-link-icon icon-newsfeed">
+                    <use xlink:href="#svg-login"></use>
+                </svg>
+                <!-- /MENU ITEM LINK ICON -->
+                Signout
+            </a>
+            <!-- /MENU ITEM LINK -->
+        </li>
+        <!-- /MENU ITEM -->
+
+    </ul>
+    <!-- /MENU -->
+</nav>
