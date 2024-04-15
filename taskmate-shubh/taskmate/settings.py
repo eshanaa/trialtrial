@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'taskmate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ateam',
+        'NAME': 'ATEAM',
         'USER': 'root',
         'PASSWORD': 'Ashna20003',
         'HOST':'localhost',
